@@ -1,0 +1,2277 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Hari Raya Idul Fitri 1447 H</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ================================================================
+   ROOT & RESET
+   ================================================================ */
+:root {
+  --gold:          #FFD700;
+  --dark:          #020617;
+  --navy:          #0f172a;
+  --text-light:    #f8fafc;
+  --text-muted:    #94a3b8;
+  --glass:         rgba(255,255,255,0.04);
+  --glass-border:  rgba(255,215,0,0.18);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--dark);
+  color: var(--text-light);
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ================================================================
+   STAR CANVAS
+   ================================================================ */
+#starCanvas {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+}
+
+/* ================================================================
+   OPENING SCREEN
+   ================================================================ */
+#opening {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: radial-gradient(ellipse at 50% 30%, #0f1f40 0%, #020617 70%);
+  transition: opacity 1.2s ease, visibility 1.2s ease;
+  overflow: hidden;
+}
+#opening.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
+
+/* Moon */
+.moon-wrap {
+  position: absolute; top: 8%; right: 12%;
+  width: 100px; height: 100px;
+}
+@media(max-width:600px){ .moon-wrap{ width:70px; height:70px; top:6%; right:8%; } }
+.moon {
+  width:100%; height:100%; border-radius:50%;
+  background: radial-gradient(circle at 35% 35%, #fffde7, #ffe082 40%, #ffc107 80%);
+  box-shadow:
+    0 0 30px 10px rgba(255,215,0,.4),
+    0 0 80px 30px rgba(255,193,7,.2),
+    0 0 160px 60px rgba(255,193,7,.08);
+  animation: moonPulse 4s ease-in-out infinite;
+  position: relative;
+}
+.moon::after {
+  content:''; position:absolute; top:10%; right:12%;
+  width:30%; height:28%; border-radius:50%;
+  background:rgba(255,255,200,.18);
+}
+@keyframes moonPulse {
+  0%,100%{ box-shadow:0 0 30px 10px rgba(255,215,0,.4),0 0 80px 30px rgba(255,193,7,.2),0 0 160px 60px rgba(255,193,7,.08); }
+  50%    { box-shadow:0 0 50px 20px rgba(255,215,0,.6),0 0 120px 50px rgba(255,193,7,.3),0 0 220px 90px rgba(255,193,7,.12); }
+}
+
+/* Masjid */
+.masjid-wrap {
+  position:absolute; bottom:0; left:50%;
+  transform:translateX(-50%); width:min(700px,100%);
+}
+.masjid-svg{ width:100%; display:block; }
+
+/* Ketupat float */
+.ketupat-container{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+.ketupat {
+  position:absolute; background:transparent;
+  border:2px solid rgba(100,200,100,0.7); transform:rotate(45deg);
+  box-shadow:0 0 8px rgba(100,220,100,.5),0 0 20px rgba(100,220,100,.2);
+  animation:floatKetupat linear infinite; opacity:0;
+}
+@keyframes floatKetupat {
+  0%  { transform:rotate(45deg)  translateY(0)      scale(.8);  opacity:0; }
+  10% { opacity:.8; }
+  90% { opacity:.6; }
+  100%{ transform:rotate(405deg) translateY(-110vh) scale(1.1); opacity:0; }
+}
+
+/* Opening text */
+.opening-content {
+  position:relative; z-index:10;
+  text-align:center; padding:2rem 1.5rem; max-width:700px;
+}
+.opening-bismillah {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1rem,3vw,1.5rem); color:var(--gold); letter-spacing:.15em;
+  margin-bottom:1rem; opacity:0;
+  animation:fadeScaleIn 1.2s ease forwards .5s;
+}
+.opening-title {
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.5rem,5vw,3rem); font-weight:700; line-height:1.2;
+  background:linear-gradient(135deg,#FFD700,#FFF8DC,#FFD700,#B8860B);
+  background-size:200% auto;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  opacity:0; margin-bottom:.5rem;
+  animation:fadeScaleIn 1.2s ease forwards 1.2s, shimmer 3s linear infinite 2s;
+}
+.opening-year {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1rem,3vw,1.4rem); color:rgba(255,215,0,.75); letter-spacing:.2em;
+  opacity:0; margin-bottom:1.5rem;
+  animation:fadeScaleIn 1.2s ease forwards 1.8s;
+}
+.opening-sub {
+  font-size:clamp(.75rem,2vw,.95rem); color:var(--text-muted); letter-spacing:.08em;
+  opacity:0; margin-bottom:2.5rem;
+  animation:fadeScaleIn 1.2s ease forwards 2.4s;
+}
+@keyframes fadeScaleIn {
+  from{ opacity:0; transform:scale(.92) translateY(10px); }
+  to  { opacity:1; transform:scale(1)   translateY(0); }
+}
+@keyframes shimmer {
+  0%  { background-position:0%   50%; }
+  100%{ background-position:200% 50%; }
+}
+#btnBuka {
+  opacity:0; animation:fadeScaleIn 1.2s ease forwards 3.2s;
+  background:linear-gradient(135deg,#c8960c,#FFD700,#c8960c); background-size:200% auto;
+  color:#020617; border:none; padding:.9rem 2.8rem;
+  font-family:'Cinzel',serif; font-size:1rem; font-weight:700; letter-spacing:.12em;
+  border-radius:50px; cursor:pointer;
+  box-shadow:0 0 20px rgba(255,215,0,.4),0 0 60px rgba(255,215,0,.15);
+  transition:all .3s ease;
+}
+#btnBuka:hover {
+  background-position:right center;
+  box-shadow:0 0 35px rgba(255,215,0,.7),0 0 100px rgba(255,215,0,.3);
+  transform:translateY(-2px) scale(1.04);
+}
+
+/* ================================================================
+   MAIN CONTENT
+   ================================================================ */
+#mainContent {
+  display:none; opacity:0;
+  min-height:100vh; padding:2rem 1rem 5rem;
+  position:relative; z-index:10;
+  transition:opacity .8s ease;
+}
+#mainContent.visible{ display:block; }
+#mainContent.shown  { opacity:1; }
+
+.main-inner{ max-width:580px; margin:0 auto; }
+
+/* Header */
+.main-header{ text-align:center; margin-bottom:2rem; padding-top:1.5rem; }
+.ornament{ display:flex; align-items:center; justify-content:center; gap:.75rem; margin-bottom:.5rem; }
+.ornament-line{ flex:1; max-width:80px; height:1px; background:linear-gradient(to right,transparent,var(--gold)); }
+.ornament-line.right{ background:linear-gradient(to left,transparent,var(--gold)); }
+.ornament-diamond{ width:8px; height:8px; background:var(--gold); transform:rotate(45deg); box-shadow:0 0 8px var(--gold); }
+.main-header h2 {
+  font-family:'Cinzel',serif; font-size:clamp(1.1rem,4vw,1.6rem);
+  background:linear-gradient(135deg,#FFD700,#FFF8DC,#FFD700);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+
+/* Card */
+.card {
+  background:var(--glass); border:1px solid var(--glass-border);
+  border-radius:20px; padding:1.6rem 1.5rem;
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  margin-bottom:1.4rem;
+  box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,215,0,.08);
+}
+.card-label {
+  font-size:.72rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--gold); margin-bottom:.8rem;
+  display:flex; align-items:center; gap:.5rem;
+}
+.card-label::before{ content:''; display:inline-block; width:16px; height:1px; background:var(--gold); }
+
+/* Select */
+select {
+  width:100%; background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,215,0,.25); border-radius:12px;
+  color:var(--text-light); padding:.75rem 2.5rem .75rem 1rem;
+  font-family:'Poppins',sans-serif; font-size:.9rem;
+  appearance:none; -webkit-appearance:none; cursor:pointer; outline:none;
+  transition:border-color .3s, box-shadow .3s;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23FFD700' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 1rem center; background-size:10px;
+  margin-bottom:.8rem;
+}
+select:focus{ border-color:var(--gold); box-shadow:0 0 0 3px rgba(255,215,0,.1); }
+select option{ background:#1e293b; color:var(--text-light); }
+
+/* Buttons */
+.btn-gold {
+  display:block; width:100%;
+  background:linear-gradient(135deg,#b8860b,#FFD700,#b8860b); background-size:200% auto;
+  color:#020617; border:none; padding:.9rem 1.5rem;
+  font-family:'Cinzel',serif; font-size:.95rem; font-weight:700; letter-spacing:.1em;
+  border-radius:12px; cursor:pointer;
+  box-shadow:0 4px 20px rgba(255,215,0,.25); transition:all .3s ease; margin-top:.4rem;
+}
+.btn-gold:hover{ background-position:right center; box-shadow:0 6px 30px rgba(255,215,0,.5); transform:translateY(-2px); }
+.btn-gold:active{ transform:translateY(0); }
+
+.btn-thr {
+  display:block; width:100%;
+  background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(5,150,105,.2));
+  border:1px solid rgba(16,185,129,.4); color:#6ee7b7;
+  padding:.9rem 1.5rem;
+  font-family:'Cinzel',serif; font-size:1rem; font-weight:700; letter-spacing:.08em;
+  border-radius:12px; cursor:pointer;
+  box-shadow:0 4px 20px rgba(16,185,129,.1); transition:all .3s ease; margin-top:.8rem;
+}
+.btn-thr:hover{
+  background:linear-gradient(135deg,rgba(16,185,129,.25),rgba(5,150,105,.35));
+  box-shadow:0 6px 30px rgba(16,185,129,.3); transform:translateY(-2px);
+  border-color:rgba(16,185,129,.7);
+}
+
+/* Divider */
+.section-divider{ display:flex; align-items:center; gap:.75rem; margin:2rem 0; }
+.section-divider span:not(.divider-text){
+  flex:1; height:1px;
+  background:linear-gradient(to right,transparent,rgba(255,215,0,.35),transparent);
+}
+.divider-text{
+  font-family:'Cinzel',serif; font-size:.7rem; letter-spacing:.18em;
+  color:rgba(255,215,0,.7); white-space:nowrap;
+}
+
+/* ================================================================
+   PESAN UMUM
+   ================================================================ */
+.pesan-umum-card{ border-color:rgba(255,215,0,.12); }
+
+.pesan-umum-body {
+  max-height:300px;
+  overflow-y:auto;
+  padding-right:.5rem;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,215,0,.35) transparent;
+}
+.pesan-umum-body::-webkit-scrollbar      { width:4px; }
+.pesan-umum-body::-webkit-scrollbar-track{ background:transparent; }
+.pesan-umum-body::-webkit-scrollbar-thumb{ background:rgba(255,215,0,.35); border-radius:2px; }
+
+.pesan-umum-body p {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(.9rem,2.5vw,1.05rem);
+  line-height:1.9; color:#cbd5e1; text-align:justify;
+  margin-bottom:.9rem;
+}
+.pesan-umum-body p:last-child{ margin-bottom:0; }
+.pesan-umum-body em    { color:rgba(255,215,0,.85); font-style:italic; }
+.pesan-umum-body strong{ color:var(--gold); font-weight:600; }
+.pesan-umum-closing{
+  font-style:italic !important;
+  color:rgba(255,215,0,.8) !important;
+  text-align:center !important;
+}
+
+/* ================================================================
+   UCAPAN KHUSUS (RESULT CARD)
+   ================================================================ */
+#ucapanResult {
+  display:none; opacity:0;
+  transition:opacity .7s ease;
+  margin-bottom:1rem;
+}
+#ucapanResult.show { display:block; }
+#ucapanResult.shown{ opacity:1; }
+
+.ucapan-card {
+  background:linear-gradient(135deg,rgba(15,23,42,.95),rgba(2,6,23,.98));
+  border:1px solid rgba(255,215,0,.3); border-radius:20px;
+  padding:2rem 1.6rem 1.6rem;
+  text-align:center; position:relative; overflow:hidden;
+  box-shadow:0 0 40px rgba(255,215,0,.08),0 20px 60px rgba(0,0,0,.5);
+}
+.ucapan-card::before{
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(255,215,0,.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+
+.uc-to{
+  font-family:'Cormorant Garamond',serif; font-style:italic;
+  font-size:.9rem; color:var(--text-muted); letter-spacing:.05em; margin-bottom:.3rem;
+}
+.uc-name{
+  font-family:'Cinzel',serif; font-size:clamp(1.2rem,4vw,1.8rem); line-height:1.3;
+  background:linear-gradient(135deg,#FFD700,#FFF8DC,#FFD700);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:.2rem;
+}
+.uc-kelas{
+  font-size:.75rem; letter-spacing:.15em; text-transform:uppercase;
+  color:rgba(255,215,0,.6); margin-bottom:1.4rem;
+}
+.ucapan-divider{
+  display:flex; align-items:center; gap:.75rem; margin-bottom:1.4rem;
+}
+.ucapan-divider span{
+  flex:1; height:1px;
+  background:linear-gradient(to right,transparent,rgba(255,215,0,.4),transparent);
+}
+.ucapan-divider .diamond{
+  width:7px; height:7px; background:var(--gold);
+  transform:rotate(45deg); box-shadow:0 0 6px var(--gold); flex-shrink:0;
+}
+
+/* Pesan teks — ditampilkan sebagai teks biasa (TIDAK editable) */
+.uc-pesan-text{
+  position:relative; z-index:1;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1rem,2.8vw,1.15rem);
+  line-height:2; color:#e2e8f0; text-align:center;
+  white-space:pre-wrap;
+  border-top:1px solid rgba(255,215,0,.12);
+  padding-top:1.1rem;
+}
+
+/* ================================================================
+   KETUPAT RAIN
+   ================================================================ */
+#ketupatRain{
+  position:fixed; inset:0; pointer-events:none; z-index:200; overflow:hidden;
+}
+.rain-k{
+  position:absolute; top:-30px; border:2px solid;
+  transform:rotate(45deg);
+  animation:rainFall linear forwards; opacity:0;
+}
+@keyframes rainFall {
+  0%  { opacity:0; transform:rotate(45deg)  translateY(0); }
+  10% { opacity:.9; }
+  90% { opacity:.7; }
+  100%{ opacity:0; transform:rotate(405deg) translateY(110vh); }
+}
+
+/* ================================================================
+   THR MODAL
+   ================================================================ */
+#thrModal{
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,.75); z-index:500;
+  align-items:center; justify-content:center;
+  backdrop-filter:blur(6px);
+}
+#thrModal.open{ display:flex; }
+
+.modal-box{
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  border:1px solid rgba(255,215,0,.3); border-radius:24px;
+  padding:2.5rem 2rem; max-width:380px; width:90%;
+  text-align:center; position:relative;
+  box-shadow:0 0 60px rgba(255,215,0,.1),0 30px 80px rgba(0,0,0,.6);
+  animation:modalIn .4s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes modalIn {
+  from{ opacity:0; transform:scale(.8) translateY(20px); }
+  to  { opacity:1; transform:scale(1)  translateY(0); }
+}
+.modal-close{
+  position:absolute; top:1rem; right:1rem;
+  background:rgba(255,255,255,.08); border:none; color:var(--text-muted);
+  width:32px; height:32px; border-radius:50%; font-size:1rem;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:all .2s;
+}
+.modal-close:hover{ background:rgba(255,255,255,.15); color:#fff; }
+.dana-badge{
+  display:inline-flex; align-items:center; justify-content:center;
+  background:linear-gradient(135deg,#0f70f0,#0050cc); color:#fff;
+  font-family:'Poppins',sans-serif; font-weight:700; font-size:1.4rem;
+  width:80px; height:80px; border-radius:22px; margin-bottom:1.2rem;
+  box-shadow:0 6px 25px rgba(15,112,240,.4);
+}
+.modal-title{ font-family:'Cinzel',serif; font-size:1.2rem; color:var(--gold); margin-bottom:.5rem; }
+.modal-text { font-size:.85rem; color:var(--text-muted); line-height:1.6; margin-bottom:1.5rem; }
+.phone-display{
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,215,0,.2);
+  border-radius:12px; padding:.9rem 1.2rem;
+  font-family:'Poppins',sans-serif; font-size:1.4rem; font-weight:600; letter-spacing:.08em;
+  color:var(--text-light); margin-bottom:1rem;
+}
+.btn-copy{
+  background:linear-gradient(135deg,#0f70f0,#0050cc); color:#fff; border:none;
+  padding:.75rem 2rem; border-radius:10px;
+  font-family:'Poppins',sans-serif; font-size:.9rem; font-weight:600;
+  cursor:pointer; transition:all .3s;
+  box-shadow:0 4px 15px rgba(15,112,240,.3); width:100%;
+}
+.btn-copy:hover { box-shadow:0 6px 25px rgba(15,112,240,.5); transform:translateY(-2px); }
+.btn-copy.copied{ background:linear-gradient(135deg,#059669,#047857); box-shadow:0 4px 15px rgba(5,150,105,.4); }
+
+/* Scrollbar global */
+::-webkit-scrollbar      { width:6px; }
+::-webkit-scrollbar-track{ background:var(--dark); }
+::-webkit-scrollbar-thumb{ background:rgba(255,215,0,.3); border-radius:3px; }
+
+/* ================================================================
+   MUSIC PLAYER
+   ================================================================ */
+#musicPlayer {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  z-index: 300;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 8px;
+  /* Give room for vinyl that sticks out left */
+  padding-left: 24px;
+}
+
+/* ── Library panel ── */
+.player-library {
+  background: rgba(8,14,30,.92);
+  border: 1px solid rgba(255,215,0,.22);
+  border-radius: 16px;
+  width: 240px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s cubic-bezier(.4,0,.2,1), opacity .3s ease, transform .3s ease;
+  opacity: 0;
+  transform: translateY(8px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 8px 32px rgba(0,0,0,.6);
+}
+.player-library.open {
+  max-height: 260px;
+  opacity: 1;
+  transform: translateY(0);
+}
+.library-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px 6px;
+  border-bottom: 1px solid rgba(255,215,0,.1);
+}
+.library-title {
+  font-family: 'Cinzel', serif;
+  font-size: .65rem; letter-spacing: .12em;
+  color: rgba(255,215,0,.8);
+}
+.library-count {
+  font-size: .6rem; color: var(--text-muted);
+  background: rgba(255,215,0,.08);
+  border-radius: 8px; padding: 1px 6px;
+}
+.library-list {
+  overflow-y: auto; max-height: 200px;
+  padding: 4px 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,215,0,.25) transparent;
+}
+.library-list::-webkit-scrollbar      { width: 3px; }
+.library-list::-webkit-scrollbar-thumb{ background: rgba(255,215,0,.25); border-radius: 2px; }
+
+.library-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: background .15s;
+  border: none; background: transparent; width: 100%;
+  text-align: left;
+}
+.library-item:hover { background: rgba(255,215,0,.07); }
+.library-item.active { background: rgba(255,215,0,.12); }
+
+.lib-num {
+  font-size: .6rem; color: rgba(255,215,0,.4);
+  min-width: 16px; text-align: right;
+  font-family: 'Poppins', sans-serif;
+}
+.lib-icon {
+  flex-shrink: 0;
+  width: 18px; height: 18px;
+  display: flex; align-items: center; justify-content: center;
+}
+.lib-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: .7rem; color: #cbd5e1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  flex: 1;
+}
+.library-item.active .lib-name { color: var(--gold); }
+
+/* ── Main player bar ── */
+.player-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(8,14,30,.92);
+  border: 1px solid rgba(255,215,0,.22);
+  border-radius: 40px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 24px rgba(0,0,0,.55);
+  overflow: visible;
+  padding-left: 28px; /* space for vinyl overhang */
+  position: relative;
+}
+
+/* Vinyl disc (floats above/outside the bar on the left) */
+.vinyl-wrap {
+  width: 56px; height: 56px;
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 8px rgba(255,215,0,.3));
+  transition: filter .3s;
+  z-index: 10;
+}
+.vinyl-wrap:hover { filter: drop-shadow(0 0 16px rgba(255,215,0,.55)); }
+
+.vinyl-disc {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #1a1a1a 0%, #111 18%, transparent 19%),
+    repeating-radial-gradient(circle at 50% 50%,
+      #1c1c1c 0px, #1c1c1c 2px,
+      #282828 2px, #282828 4px,
+      #1c1c1c 4px, #1c1c1c 6px
+    );
+  position: relative;
+  box-shadow:
+    0 0 0 2px rgba(255,215,0,.35),
+    0 0 0 3px rgba(8,14,30,.8),
+    0 4px 16px rgba(0,0,0,.7);
+}
+.vinyl-disc.spinning { animation: vinylSpin 2.5s linear infinite; }
+
+.vinyl-disc::before {
+  content: '';
+  position: absolute; inset: 0; border-radius: 50%;
+  background: conic-gradient(
+    transparent 0deg, rgba(255,255,255,.04) 30deg, transparent 60deg,
+    rgba(255,255,255,.03) 120deg, transparent 150deg,
+    rgba(255,255,255,.05) 210deg, transparent 240deg,
+    rgba(255,255,255,.03) 300deg, transparent 330deg
+  );
+}
+.vinyl-disc::after {
+  content: '';
+  position: absolute; top:50%; left:50%;
+  transform: translate(-50%,-50%);
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2a1a00 0%, #0a0600 100%);
+  border: 1px solid rgba(255,215,0,.4);
+}
+.vinyl-label {
+  position: absolute; top:50%; left:50%;
+  transform: translate(-50%,-50%);
+  width: 22px; height: 22px; border-radius: 50%;
+  background: radial-gradient(circle, #8b6914 0%, #3a2a06 100%);
+  border: 1px solid rgba(255,215,0,.45);
+  z-index: 1;
+}
+
+/* Tonearm */
+.tonearm {
+  position: absolute;
+  top: 4px; right: 2px;
+  width: 20px; height: 1.5px;
+  background: linear-gradient(to right, rgba(255,215,0,.8), rgba(255,215,0,.35));
+  border-radius: 1px;
+  transform-origin: right center;
+  transform: rotate(-28deg);
+  transition: transform .5s ease;
+  z-index: 2;
+}
+.tonearm.on-record { transform: rotate(-8deg); }
+.tonearm::before {
+  content: '';
+  position: absolute; right: -1px; top: -3px;
+  width: 3px; height: 7px;
+  background: rgba(255,215,0,.55);
+  border-radius: 1.5px;
+}
+
+@keyframes vinylSpin {
+  from{ transform: rotate(0deg); }
+  to  { transform: rotate(360deg); }
+}
+
+/* Controls section */
+.player-controls {
+  display: flex; align-items: center; gap: 2px;
+  padding: 0 6px;
+}
+
+.ctrl-btn {
+  width: 30px; height: 30px;
+  border: none; background: transparent;
+  cursor: pointer; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  transition: background .18s, transform .12s;
+  flex-shrink: 0;
+}
+.ctrl-btn:hover  { background: rgba(255,215,0,.12); transform: scale(1.12); }
+.ctrl-btn:active { transform: scale(.92); }
+.ctrl-btn svg    { display: block; }
+
+/* Info section */
+.player-info {
+  display: flex; flex-direction: column; gap: 3px;
+  padding: 0 6px 0 2px;
+  min-width: 0;
+}
+.track-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: .6rem; color: rgba(255,215,0,.8);
+  letter-spacing: .03em;
+  max-width: 100px; overflow: hidden;
+  white-space: nowrap; text-overflow: ellipsis;
+}
+.progress-wrap {
+  width: 100%; height: 3px;
+  background: rgba(255,255,255,.1);
+  border-radius: 2px; cursor: pointer; overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, #b8860b, #FFD700);
+  border-radius: 2px; width: 0%;
+  transition: width .3s linear;
+  pointer-events: none;
+}
+
+/* Library toggle button (rightmost) */
+.btn-library {
+  width: 36px; height: 48px;
+  border: none; background: rgba(255,215,0,.06);
+  border-left: 1px solid rgba(255,215,0,.1);
+  cursor: pointer; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .18s;
+  flex-shrink: 0;
+  border-radius: 0 40px 40px 0;
+}
+.btn-library:hover { background: rgba(255,215,0,.14); }
+.btn-library svg   { display: block; transition: transform .3s; }
+.btn-library.open svg { transform: rotate(180deg); }
+</style>
+</head>
+<body>
+
+<canvas id="starCanvas"></canvas>
+
+<!-- ============================================================
+     OPENING
+     ============================================================ -->
+<div id="opening">
+  <div class="ketupat-container" id="ketupatContainer"></div>
+  <div class="moon-wrap"><div class="moon"></div></div>
+
+  <div class="masjid-wrap">
+    <svg class="masjid-svg" viewBox="0 0 700 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="mGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1e3a5f" stop-opacity="0.9"/>
+          <stop offset="100%" stop-color="#0a1628" stop-opacity="0.95"/>
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <rect x="0" y="240" width="700" height="40" fill="url(#mGrad)" opacity="0.5"/>
+      <rect x="150" y="120" width="400" height="125" fill="url(#mGrad)"/>
+      <ellipse cx="350" cy="120" rx="80" ry="70" fill="url(#mGrad)"/>
+      <rect x="160" y="60" width="28" height="180" fill="url(#mGrad)"/>
+      <ellipse cx="174" cy="60" rx="18" ry="28" fill="url(#mGrad)"/>
+      <line x1="174" y1="28" x2="174" y2="5" stroke="rgba(255,215,0,0.7)" stroke-width="1.5" filter="url(#glow)"/>
+      <polygon points="174,0 171,8 177,8" fill="rgba(255,215,0,0.9)" filter="url(#glow)"/>
+      <rect x="512" y="60" width="28" height="180" fill="url(#mGrad)"/>
+      <ellipse cx="526" cy="60" rx="18" ry="28" fill="url(#mGrad)"/>
+      <line x1="526" y1="28" x2="526" y2="5" stroke="rgba(255,215,0,0.7)" stroke-width="1.5" filter="url(#glow)"/>
+      <polygon points="526,0 523,8 529,8" fill="rgba(255,215,0,0.9)" filter="url(#glow)"/>
+      <line x1="350" y1="52" x2="350" y2="28" stroke="rgba(255,215,0,0.8)" stroke-width="2" filter="url(#glow)"/>
+      <path d="M340,24 A12,12 0 1,1 360,24 A8,8 0 1,0 340,24" fill="rgba(255,215,0,0.85)" filter="url(#glow)"/>
+      <ellipse cx="260" cy="120" rx="40" ry="35" fill="url(#mGrad)"/>
+      <ellipse cx="440" cy="120" rx="40" ry="35" fill="url(#mGrad)"/>
+      <path d="M225,200 Q225,175 240,175 Q255,175 255,200 Z" fill="rgba(255,215,0,0.12)" stroke="rgba(255,215,0,0.3)" stroke-width="1"/>
+      <path d="M320,200 Q320,165 350,165 Q380,165 380,200 Z" fill="rgba(255,215,0,0.12)" stroke="rgba(255,215,0,0.3)" stroke-width="1"/>
+      <path d="M445,200 Q445,175 460,175 Q475,175 475,200 Z" fill="rgba(255,215,0,0.12)" stroke="rgba(255,215,0,0.3)" stroke-width="1"/>
+      <ellipse cx="350" cy="242" rx="250" ry="8" fill="rgba(255,215,0,0.05)"/>
+    </svg>
+  </div>
+
+  <div class="opening-content">
+    <div class="opening-bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
+    <h1 class="opening-title">Selamat Hari Raya<br>Idul Fitri</h1>
+    <div class="opening-year">1447 H / 2026 M</div>
+    <p class="opening-sub">Minal Aidin Wal Faizin · Mohon Maaf Lahir &amp; Batin</p>
+    <button id="btnBuka" onclick="openMain()">✦ Buka Ucapan ✦</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<div id="mainContent">
+  <div class="main-inner">
+
+    <div class="main-header">
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <div class="ornament-line right"></div>
+      </div>
+      <h2>Ucapan Idul Fitri 1447 H</h2>
+    </div>
+
+    <!-- ──────────────────────────────────────────
+         PESAN UMUM
+         Ditampilkan sejak awal, sebelum input data.
+         Isi teks ini bersifat tetap (tidak editable user).
+         ────────────────────────────────────────── -->
+    <div class="card pesan-umum-card">
+      <div class="card-label">📜 Pesan Umum</div>
+      <div class="pesan-umum-body">
+        <p>Assalamu'alaikum Warahmatullahi Wabarakatuh,</p>
+        <p>Segala puji bagi Allah SWT, Sang Sutradara Kehidupan yang Paling Agung, yang telah memberikan kita kesempatan untuk menyelesaikan proses <em>'syuting'</em> ibadah di bulan Ramadhan 1447 H. Setelah sebulan penuh kita melakukan <em>'production'</em> untuk meningkatkan kualitas iman, kini tibalah saatnya kita merayakan <em>'Big Premiere'</em> kemenangan di hari yang fitri ini dengan hati yang kembali suci <em>(True White Balanced)</em>.</p>
+        <p>Latar belakang permohonan maaf ini disusun karena saya menyadari bahwa interaksi kita, baik di dalam studio, lokasi syuting, maupun di ruang <em>editing</em>, sering kali mengalami <em>'technical error'</em>. Layaknya <em>footage</em> yang bocor atau audio yang <em>peaking</em>, tutur kata dan perilaku saya mungkin pernah mengganggu estetika hubungan kita atau menyebabkan <em>'mood'</em> Anda <em>drop</em> saat <em>deadline</em> melanda.</p>
+        <p>Sebagai mahasiswa Produksi Media, saya paham betul bahwa visual yang indah bermula dari <em>framing</em> yang tepat. Di hari lebaran ini, saya ingin melakukan <em>'re-framing'</em> terhadap hubungan kita, menggeser sudut pandang dari segala prasangka buruk, dan memfokuskan kembali <em>(pull focus)</em> lensa hati kita pada nilai-nilai persaudaraan yang tulus.</p>
+        <p>Dalam tinjauan pustaka selama bulan puasa, kita telah diajarkan untuk menahan hawa nafsu, yang ibaratnya seperti menahan diri dari godaan menggunakan <em>filter</em> yang berlebihan agar hasil akhirnya tetap autentik. Ramadhan adalah proses <em>'color grading'</em> spiritual yang mengubah <em>'tone'</em> hati kita yang kusam menjadi lebih cerah, tajam, dan penuh warna ketakwaan.</p>
+        <p>Metodologi maaf yang saya gunakan kali ini adalah metode <em>'Cut-to-Content'</em>, langsung pada intinya tanpa basa-basi. Saya memohon maaf atas segala kesalahan yang disengaja maupun yang bersifat <em>candid</em>. Mari kita lakukan <em>'Wipe Clean'</em> pada memori kita terhadap segala gesekan interpersonal, agar <em>'timeline'</em> persahabatan kita kembali mulus tanpa ada <em>'frame'</em> yang rusak <em>(corrupted)</em>.</p>
+        <p>Berdasarkan analisis hasil produksi selama setahun terakhir, saya menemukan bahwa ego kita sering kali menjadi <em>'blocking'</em> terbesar dalam menciptakan kolaborasi yang harmonis. Namun, melalui momentum Idul Fitri ini, mari kita hapus segala <em>noise</em> konflik dan menyatukan <em>'vibe'</em> kita dalam frekuensi yang sama untuk menghasilkan karya-karya kehidupan yang lebih inspiratif.</p>
+        <p>Pembahasan mengenai hari kemenangan ini adalah tentang <em>'Final Export'</em> yang berkualitas. Nilai akhir yang kita harapkan bukanlah sekadar <em>rating</em> tinggi dari manusia, melainkan status <em>'Approved'</em> dari Allah SWT untuk masuk ke surga-Nya melalui jalur <em>'Fast Track' (Rendered and Optimized)</em> bagi hamba-hamba-Nya yang ikhlas memaafkan.</p>
+        <p>Keterbatasan dalam ucapan ini saya akui karena keterbatasan <em>resource</em> kata-kata saya dalam merangkai kalimat yang estetis. Layaknya kamera yang kehabisan baterai saat momen krusial, lisan saya pun sering kali <em>'mati kutu'</em> untuk memberikan respons terbaik kepada Anda semua selama hiruk pikuk pengerjaan proyek mata kuliah.</p>
+        <p>Sebagai saran untuk pengembangan kreativitas kita di masa depan, marilah kita perkuat <em>'storytelling'</em> kehidupan kita dengan narasi-narasi kebaikan. Semoga kita semua konsisten menerapkan prinsip <em>'Good Ethics'</em> dalam berkarya dan tetap solid dalam <em>'teamwork'</em> untuk menaklukkan tantangan industri media yang semakin dinamis.</p>
+        <p>Akhir kata, selamat Hari Raya Idul Fitri 1447 H. <strong>Minal Aidin Wal Faizin, Mohon Maaf Lahir dan Batin.</strong> Semoga seluruh amal ibadah kita diterima <em>(Wrapped and Delivered)</em> oleh Allah SWT dan segala dosa kita dihapus <em>(Deleted from Disk)</em> secara permanen. Mari kita mulai kembali dari titik <em>'0' (Timecode 00:00:00:00)</em> dengan semangat baru untuk memproduksi masa depan yang lebih gemilang.</p>
+        <p class="pesan-umum-closing">Wassalamu'alaikum Warahmatullahi Wabarakatuh.</p>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="section-divider">
+      <span></span>
+      <span class="divider-text">✦ Ucapan Khusus ✦</span>
+      <span></span>
+    </div>
+
+    <!-- ──────────────────────────────────────────
+         INPUT: PILIH KELOMPOK & NAMA
+         ────────────────────────────────────────── -->
+    <div class="card">
+      <div class="card-label">Pilih Kelompok &amp; Nama</div>
+      <select id="selKelas" onchange="updateNama()">
+        <option value="">— Pilih Kelompok —</option>
+        <option value="A">KELAS A</option>
+        <option value="B">KELAS B</option>
+        <option value="DOSEN">DOSEN</option>
+      </select>
+      <select id="selNama" onchange="onNamaChange()">
+        <option value="">— Pilih Nama —</option>
+      </select>
+      <button class="btn-gold" onclick="tampilkanUcapan()">✨ Lihat Ucapan</button>
+    </div>
+
+    <!-- ──────────────────────────────────────────
+         PESAN KHUSUS — hanya muncul setelah klik
+         "Lihat Ucapan". Isi pesan diambil dari data
+         di JS (bisa diedit manual di dalam file ini).
+         Teks TIDAK bisa diedit oleh pengguna.
+         ────────────────────────────────────────── -->
+    <div id="ucapanResult">
+      <div class="ucapan-card">
+        <div class="uc-to">Kepada yang terhormat,</div>
+        <div class="uc-name"  id="ucNama"></div>
+        <div class="uc-kelas" id="ucKelas"></div>
+        <div class="ucapan-divider">
+          <span></span><div class="diamond"></div><span></span>
+        </div>
+        <!-- Pesan ditampilkan sebagai teks biasa, TIDAK editable -->
+        <div class="uc-pesan-text" id="ucPesan"></div>
+      </div>
+      <button class="btn-thr" onclick="openTHR()">💸 THR</button>
+    </div>
+
+  </div><!-- /.main-inner -->
+</div><!-- /#mainContent -->
+
+<!-- Ketupat rain -->
+<div id="ketupatRain"></div>
+
+<!-- THR Modal -->
+<div id="thrModal" onclick="closeTHRBackdrop(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeTHR()">✕</button>
+    <div class="dana-badge">DANA</div>
+    <div class="modal-title">Kirim THR 💸</div>
+    <div class="modal-text">Silahkan kirim THR ke nomor DANA di bawah ini MWEHEHE😋<br>Terimakasih</div>
+    <div class="phone-display">083168499012</div>
+    <button class="btn-copy" id="btnCopy" onclick="copyNumber()">📋 Salin Nomor</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     MUSIC PLAYER
+     ✏️  Daftar lagu diisi di array TRACKS di dalam <script>.
+         Letakkan file .mp3 di folder yang sama dengan HTML ini.
+     ============================================================ -->
+<div id="musicPlayer">
+
+  <!-- Library panel (toggle) -->
+  <div class="player-library" id="playerLibrary">
+    <div class="library-header">
+      <span class="library-title">🎵 Library</span>
+      <span class="library-count" id="libCount">0 lagu</span>
+    </div>
+    <div class="library-list" id="libraryList"></div>
+  </div>
+
+  <!-- Main bar -->
+  <div class="player-bar">
+
+    <!-- Vinyl (absolute, floats outside/above left edge of bar) -->
+    <div class="vinyl-wrap" id="vinylWrap" onclick="playerTogglePlay()" title="Play / Pause">
+      <div class="vinyl-disc" id="vinylDisc">
+        <div class="vinyl-label"></div>
+      </div>
+      <div class="tonearm" id="tonearm"></div>
+    </div>
+
+    <!-- Controls -->
+    <div class="player-controls">
+      <!-- Prev -->
+      <button class="ctrl-btn" onclick="playerPrev()" title="Sebelumnya">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+          <polygon points="13,0 5,6.5 13,13" fill="rgba(255,215,0,.75)"/>
+          <rect x="0" y="0" width="3" height="13" rx="1" fill="rgba(255,215,0,.75)"/>
+        </svg>
+      </button>
+
+      <!-- Play -->
+      <button class="ctrl-btn" id="btnPlay" onclick="playerPlay()" title="Play">
+        <svg width="13" height="15" viewBox="0 0 13 15" fill="none">
+          <polygon points="0,0 13,7.5 0,15" fill="#FFD700"/>
+        </svg>
+      </button>
+
+      <!-- Pause -->
+      <button class="ctrl-btn" id="btnPause" onclick="playerPause()" title="Pause" style="display:none">
+        <svg width="11" height="14" viewBox="0 0 11 14" fill="none">
+          <rect x="0" y="0" width="4" height="14" rx="1.5" fill="#FFD700"/>
+          <rect x="7" y="0" width="4" height="14" rx="1.5" fill="#FFD700"/>
+        </svg>
+      </button>
+
+      <!-- Stop -->
+      <button class="ctrl-btn" onclick="playerStop()" title="Stop">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <rect x="0" y="0" width="12" height="12" rx="2" fill="rgba(255,215,0,.55)"/>
+        </svg>
+      </button>
+
+      <!-- Next -->
+      <button class="ctrl-btn" onclick="playerNext()" title="Selanjutnya">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+          <polygon points="0,0 8,6.5 0,13" fill="rgba(255,215,0,.75)"/>
+          <rect x="10" y="0" width="3" height="13" rx="1" fill="rgba(255,215,0,.75)"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Info + progress -->
+    <div class="player-info">
+      <div class="track-name" id="trackName">— no track —</div>
+      <div class="progress-wrap" id="progressWrap" onclick="playerSeek(event)">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <!-- Library toggle -->
+    <button class="btn-library" id="btnLibrary" onclick="toggleLibrary()" title="Library">
+      <svg width="16" height="14" viewBox="0 0 16 14" fill="none">
+        <rect x="0" y="0"  width="16" height="2.5" rx="1.25" fill="rgba(255,215,0,.7)"/>
+        <rect x="0" y="5.5" width="16" height="2.5" rx="1.25" fill="rgba(255,215,0,.7)"/>
+        <rect x="0" y="11" width="16" height="2.5" rx="1.25" fill="rgba(255,215,0,.7)"/>
+      </svg>
+    </button>
+
+  </div><!-- /.player-bar -->
+</div><!-- /#musicPlayer -->
+
+<!-- Audio element -->
+<audio id="audioEl" preload="auto"></audio>
+
+
+<script>
+
+/* ================================================================
+   STARS
+   ================================================================ */
+const canvas = document.getElementById('starCanvas');
+const ctx    = canvas.getContext('2d');
+let   stars  = [];
+
+function resizeCanvas(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+function initStars(){
+  stars = [];
+  for(let i=0;i<180;i++) stars.push({
+    x:Math.random()*canvas.width, y:Math.random()*canvas.height,
+    r:Math.random()*1.2+0.2,
+    speed:Math.random()*0.008+0.003,
+    phase:Math.random()*Math.PI*2
+  });
+}
+function drawStars(t){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  stars.forEach(s=>{
+    const a = 0.3+0.7*Math.abs(Math.sin(s.phase+t*s.speed));
+    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(255,255,220,${a})`; ctx.fill();
+  });
+}
+let t=0;
+function loop(){ t+=0.02; drawStars(t); requestAnimationFrame(loop); }
+window.addEventListener('resize',()=>{ resizeCanvas(); initStars(); });
+resizeCanvas(); initStars(); loop();
+
+/* ================================================================
+   OPENING KETUPAT
+   ================================================================ */
+(function(){
+  const c=['rgba(100,220,100,.75)','rgba(80,200,120,.65)','rgba(60,180,100,.70)','rgba(120,230,80,.60)'];
+  function spawn(){
+    const k=document.createElement('div'); k.className='ketupat';
+    const sz=10+Math.random()*18, col=c[Math.floor(Math.random()*c.length)];
+    k.style.cssText=`left:${Math.random()*100}%;bottom:${Math.random()*30}%;width:${sz}px;height:${sz}px;border-color:${col};box-shadow:0 0 ${sz/2}px ${col};animation-duration:${5+Math.random()*8}s;animation-delay:${Math.random()*3}s;`;
+    document.getElementById('ketupatContainer').appendChild(k);
+    setTimeout(()=>k.remove(),14000);
+  }
+  for(let i=0;i<15;i++) setTimeout(spawn,i*400);
+  setInterval(spawn,1200);
+})();
+
+/* ================================================================
+   OPEN MAIN
+   ================================================================ */
+function openMain(){
+  document.getElementById('opening').classList.add('fade-out');
+  const m=document.getElementById('mainContent');
+  m.classList.add('visible');
+  setTimeout(()=>m.classList.add('shown'),100);
+}
+
+/* ================================================================
+   DATA
+   ✏️  EDIT PESAN: Ubah teks di field "pesan" masing-masing orang.
+   ================================================================ */
+
+/*Kelas A */
+
+const PESAN_Adit =
+`Minal Aidzin Walfaidzin ditt 
+semoga hasil amal ibadah kita berdua bisa untuk menghilangkan segala dosa-dosa kita ditt
+tetap jadi kameramen handal, seperti kamera yang merekam setiap perjalanan baik di dalam kehidupan manusia
+dan selalu jadi Pribadi yang lebih baik dan akan kebih baik untuk kedepannya
+amiin
+Ibarat banjir bertemu adit
+Adit suka genangan banjir
+Bila sudah bertemu adit
+Harusnya isi dompet banjir`;
+
+const PESAN_Isal =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita berdua selalu dilindungi dari segala macam musibah sall
+dihindarkan dari segala kesalahan prediksi dan juga sifat kemarukan yang membuat mata menjadi ketagihan dan kurang bersyukur
+semoga setelah ini kita selalu diberi berita tentang kenaikan saham agar ekonomi berjalan dengan lancar
+maaf kalo selama ini punya salah dalam berteman sal..
+
+Makan nastar sambil ngupil
+Sisanya cuma kue buaya
+Maafin aku yang suka usil
+THR-nya pakai kripto ya<3
+
+Jalan-jalan ke kota Medan
+ondel-ondel makan ikan asin
+Maaf atas semua kesalahan
+Amplop THR bisa pake bit koin`;
+
+const PESAN_Aisyah =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Maaf ya syah kalo selama berteman gua ada kesalahan dalam ucapan atau perbuatann..
+itu murni karena kesalahfahaman dan juga kelalaian, semoga setelah ini kita semua menjadi lebih rukun
+amiin
+Minum kopi di bawah pohon pandan 
+Ditemani lagu yang asoy di hati 
+Lebaran tanpa saling memaafkan 
+Ibarat sayur asem tanpa terasi`;
+
+const PESAN_Alisa =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Gua mohon maaf ya al kalo pernah ada salah.. itu semua murni karena kelalaian
+jadi agar silaturahmi kita tidak terputus bolehkah minta oleh-oleh pempek aseli palembang?
+awkwkwk
+piderman bikin sambal pindang pakai cobek 
+Iron man duduk makan buah kedondong 
+Senangnya Idul Fitri sudah coming back 
+Hai, jangan lupa maafin kesalahanku dong`;
+
+const PESAN_Anggi =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maaf ya nggi kalo gua pernah ada salah, lain kali kita mabar ML agar mempererat silaurahmi
+hehe`;
+
+const PESAN_Jijah =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Sorry jahh kalo gua pernah ada salah.. Maaf kalo pernah nyinggung baik secara langsung maupun tidak langsung..
+semoga segala kesalahfahaman bisa didamaikan..
+Apakah daya bertemu jijah
+Jijah berjalan bersama kaki
+Bila Presiden hilang ijazah
+Alhamdulilah hari ini idul fitri`;
+
+const PESAN_Bimo =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Maaf bim kalau pernah ada salah.. itu semua murni karena kesalahfahaman
+semoga kita bisa berteman baik kedepannya
+amiin
+Bila dijalan bertemu bimo
+Bimo dijalan bertemu bila
+Apalah gatau gua mo
+Sini kasi THR aja la..`;
+
+const PESAN_Chang =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Maaf ya sea kalo pernah ada salah.. itu semua murni karena kesalahfahaman..
+Minal aidzin walfaidzin
+Bila ketemu dengan chang
+jangan sampai ketemu cabe
+kalau kita ketemu chang
+mari ikut menanam cabe`;
+
+const PESAN_Desta =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Gua minta maaf des kalo pernah ada salah.. minal aidzin walfaidzin yaa
+Saatnya Trading Forex Khing`;
+
+const PESAN_Dins =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Met Lebaraaannnnnnnnn
+Hehe
+Alammak
+Wordless
+Latterless
+Numberless
+THRless
+ Pergi ke pasar beli kentang
+Jangan lupa bawa keranjang
+Maaf lahir-batin, mpok dan abang
+THR dulu, baru aku sayang`;
+
+const PESAN_Eka =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maaf ka kalo pernah ada salah, itu semua murni karena kesalahfahaman..
+jangan lupa oleh oleh jembatan palembang
+hehe
+bila palembang ada eka
+pempek palembang banyak jenisnya
+bila datang bertemu eka
+bagi bagi la THR nya~`;
+
+const PESAN_Asep =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Yooooooo seppp
+Sorry abangku kalo pernah ada salah atau pernah menyinggung perasaan abangda
+itu semua murni kesalahfahaman
+jangan lupa THR di kirim ke no. dana di bawah
+hehe
+Bila Hujan Turun Asep
+Aku tak kuat tertimpa asep
+Kalau lebaran ketemu asep
+Minta THR sama asep
+
+yeayy`;
+
+const PESAN_Gea =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Makan nastar sambil ngupil
+Sisanya cuma kue buaya
+Maafin aku yang suka usil
+Lain kali lain kali ya
+Sorry ya geee kalo gua pernah ada salah.. itu semua murni karena ketidak sengajaan guaa
+mohon ampunn🙏`;
+
+const PESAN_Is =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Sorry kalo semasa kita berteman gua pernah ada salah sann.. semoga segala kesalahan kita dihapuskan di bulan suci ini..
+
+alan ke mall bareng sejawat
+Lihat diskon baju lebaran
+Maafin aku yang suka telat
+Ganteng, boleh dong kenalan`;
+
+const PESAN_Inas =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Sorry kalo semasa kita berteman atau berorganisasi gua sebagai pemimpin pernah menyinggung perasaan lu..
+itu semua murni terjadi mungkin karena ketidaksengajaan
+Minal Aidzin Walfaidzin
+Naik motor ke rumah koh Abun
+Jatuh ke kali, basah celana
+Maafkan salahku yang bejibun
+Biar afdol, THR jangan lupa`;
+
+const PESAN_Kei =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+
+Hari Lebaran sunyi-senyap
+Kucing di dapur makan ikan sayur
+Mohon maaf untuk segala hilap
+Kalo THR udah siap, aku meluncur
+Setidaknya ingin mengucapkan maaf kee kalo pernah ada salah.. Mohon dimaafkan🙏`;
+
+const PESAN_Ab =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Pergi ke pasar beli roti,
+Sekalian beli air kopi.
+Kalau aku ada salah hati,
+Maafin aku ya Abi.
+hehe
+Yoooo Wassup Mamen
+Mohon maaf bila ada tutur kata, perbuatan yang pernah menyinggung..
+Minal Aidzin Walfaidzin`;
+
+const PESAN_abay =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maaf lahir batin bayy kalo pernah ada salahh...
+Bila bertemu dengan abay
+Janganlah diabaikan saja
+Maaf Lahir Batin Abay
+THR abaikan saja`;
+
+const PESAN_Paung =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maaf ung kalo selama kita bekerjasama disepanjang jalan ini gua ada salah..
+Mohon Maaf Lahir dan Batin
+Naik pesawat ke Surabaya
+Turbulensi bikin perut mual saja
+Maaf lahir dan batin, semuanya
+THR-nya lewat dompet digital aja`;
+
+const PESAN_Fatih =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Yooooo Wassup Ketang Angkatan
+Mohon maaf kalo semasa kita kerjasama dari pertemanan sampai organisasi.. semoga kesalahan kita bisa dilebur dibulan suci ini..
+Amiin
+Ketupat lebaran dimakan bersama
+Gak dapat THR jangan bikin sukar
+Lebaran ini ingat kata Bernadia
+Untungnya bumi masih berputar`;
+
+const PESAN_Syah =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Maaf rul kalo pernah ada salah.. semoga kesalahan kita bisa dihapuskan di bulan suci ini
+Amiin
+Jalan-jalan ke kota Medan
+ondel-ondel makan ikan asin
+Maaf atas semua kesalahan
+Amplop THR bisa pake bit koin`;
+
+const PESAN_NailK =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Sorry ye naii kalo gua pernah ada salahh ke elu, kemungkinan itu semua karena kesalahfahaman..
+semoga dibulan suci ini kesalahan kita bisa terlebur..
+Amiin
+Pergi ke toko beli toner,
+Sekalian beli serum juga.
+Si Naila glowing bener,
+karena THR belum masuk dompet kita`;
+
+const PESAN_Naswa =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maaf nau kalo semasa kita berteman gua pernah ada salah ke lu..
+semoga kesalahan kita sama sama terlebur di bulan suci ini..
+Amiin
+Lebaran 2025 makin cerdas
+THR boleh dikirim ke mbah
+Kalau maafmu tulus ikhlas
+Saldo dompetku pasti nambah`;
+
+const PESAN_Nugi =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Sorry my brotherr kalo gua pernah ada salah ke lu..
+kemungkinan itu semua murni karena kesalahfahman semata dan tidak disengaja
+semoga di bulan yang suci dan fitrah ini kesalahan kita semua dileburkan..
+Amiin
+Hari Lebaran cuaca cerah
+Berkunjung ke rumah pak RT biar asoy
+Maafin aku yang suka marah
+Namanya juga manusia, bukan nabi boy`;
+
+const PESAN_Gua =
+`Hayoooo cari apaaa`;
+
+const PESAN_Q =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Gua minta maaf ya QQQQQQ kalo pernah ada salah dalam perkataan, dan perbuatan
+Mohon Maaf Lahir Batin
+🙏🙏🙏
+Hari Lebaran cuaca cerah
+Berkunjung ke rumah pak RT biar asoy
+Maafin aku yang suka marah
+Namanya juga manusia, bukan nabi boy`;
+
+const PESAN_Rendi =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Renn my brother Sorry kalo gua pernah ada salah ke lu.. semoga lu bisa memaafka gua..
+walaupun lu itu sukak ngijangin gua.. gua tetep maafin lu kok
+<3
+Bulan Ramadhan kijang pergi
+Lebaran tiba, hati ngijang
+Kalau THR-mu belum ready
+Kutunggu besok siang`;
+
+const PESAN_Reza =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maaf ya zaa kalo gua pernah ada ssalah, semoga semua kesalahan kita dileburkan di bulan yang suci ini..
+Amiin
+Bulan Ramadhan sudah pergi
+Lebaran tiba, hati riang
+Kalau THR-mu belum ready
+Kutunggu besok siang`;
+
+const PESAN_Salwa =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Sorry Ya sall kalo gua pernah ada salah baik perkataan dan perbuatann
+🙏🙏
+Bulan Ramadhan sudah pergi
+Lebaran tiba, hati riang
+Kalau THR-mu belum ready
+Kutunggu besok siang`;
+
+const PESAN_Sis =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maaf sis kalo selama berteman atau beroganisasi gua ada kurang dan kesalahan..
+semoga semua dosa dan kesalahan kita bisa dilebur dibulan suci ini
+🙏
+Makan lontong sayur enak
+Tambah sambal, makin mantap
+Maafin semua salahku, Mak
+Lu bukan Emak gua? Ya, maap`;
+
+const PESAN_Izhar =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Sorry jar kalo gua pernah ada salah ke lu baik mau perkataan atau perbuatan..
+gua bakal kangen si kalo lu gaada di promed
+
+Ketupat lebaran dimakan bersama
+Gak dapat THR jangan bikin sukar
+Lebaran ini ingat kata Bernadia
+Untungnya bumi masih berputar`;
+
+const PESAN_Adam =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maaf ya damm kalo gua pernah ada salah ke lu baik dalam perkataan maupun perbuatan..
+semoga kesalahan kita bisa dilebur dibulan suci ini <3
+Pergi ke pasar beli kentang
+Jangan lupa bawa keranjang
+Maaf lahir-batin, mpok dan abang
+THR dulu, baru aku sayang`;
+
+const PESAN_Zah =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Sorry yaa zahiyya kalo semasa kita berteman gua pernah ada salah..
+semoga kesalahan kita bisa dilebur dibulan suci ini
+Amiin
+Naik motor ke rumah koh Abun
+Jatuh ke kali, basah celana
+Maafkan salahku yang bejibun
+Biar afdol, THR jangan lupa`;
+
+const PESAN_Zee =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Maaf zee kalo semasa kita berteman atau berorganisasi gua ada salah.. kemungkinan itu adalah kesalahfahaman.. dan jangan sampai kesalahfahaman itu merusak hubungan kita semua
+dan juga semoga kesalahan kita bisa dileburkan di bulan suci ini
+Amiin
+Желся,
+
+Докладываю:
+в ходе повседневных операций
+были зафиксированы некоторые ошибки моей стороны.
+
+Характер ошибок:
+
+Степень ущерба:
+надеюсь, не критическая
+
+связипраздником Ид аль-Фитр
+принимаю решение:
+признать ошибки и запросить прощение.
+
+Прошу рассмотреть данное обращение
+и по возможности утвердить амнистию
+
+уважением.`;
+
+/*Kelas B */
+
+const PESAN_Gal =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maaf luh kalo pernah ada salah baik perkataan maupun perbuatan.. 
+Semoga kesalahan kita dapat terlebur di bulan suci  ini
+Amiin
+kapan kapan projectan musik ama fatih
+wkwkw
+Suara gitar noise sekali
+ternyata listrik belum dibeli
+Kalau aku pernah menyakiti
+Maafkan aku di hari suci`;
+
+const PESAN_Cesa =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohonn maaf cess kalo selama kta berteman atau berorganisasi gua ada salah, semoga kesalahan kita terlebur dibulan suci ini
+Amiin
+Pergi ke pasar beli jasa,
+Pulangnya mampir beli kue.
+kalau gua banyak dosa,
+Maafin yeee`;
+
+const PESAN_Arkan =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Yooo my brother
+Mohon maaf kalau gua ada kesalahan selama kita berteman atau berorganisasi..
+itu semua murni karena kesalahfahman dan tidak ada kesengajaan dalam menyinggung
+semoga semua kesalahan kita dapat terlebur dibulan suci ini
+Amiin
+Hujan turun di pagi buta
+Membuat arkan jadi basah
+Lebaran tiba arkan berpesta
+tapi gak masuk rumah karna basah`;
+
+const PESAN_Diva =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maaf div kalo gua semasa berteman pernah ada salah..
+semoga kesalahan kita dapat terlebur dibulan suci ini
+Amiin
+Hujan turun di pagi buta
+Membuat tanah jadi basah
+Lebaran tiba waktunya kita
+Saling memaafkan dengan ramah`;
+
+const PESAN_NailaS =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maaf naii kalo semasa kita berteman atau berorganisasi gua pernah ada salah..
+Semoga semua kesalahan kita bisa terlebur dibulan suci ini
+Amiin
+Minum teh di sore hari
+Sambil makan roti isi coklat
+Lebaran datang bawa energi
+Saatnya kita saling menguatkan`;
+
+const PESAN_Saz =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maaf kalau semasa berteman gua ada salah sazz
+Semoga semua kesalahan kita dileburkan dibulan suci ini
+Amiinn
+Ayam berkokok di pagi hari
+Membangunkan orang tidur nyenyak
+Hari Lebaran sudah kembali
+Mari maafkan kesalahan yang banyak`;
+
+const PESAN_Tri =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maaf kalo gua pernah ada salah ya trii
+Semoga semua kesalahan kita dilebur dibulan suci ini..
+Amiin
+Jalan-jalan ke pasar Minggu
+Pulangnya beli buah mangga
+Kalau aku banyak salah padamu
+Mohon dimaafkan ya segera`;
+
+const PESAN_DPT =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Pergi ke pasar beli ketupat,
+Pulangnya bawa es kelapa.
+Dimas, Putra, dan Pandu makan ketupat,
+Tapi minumnya es kelapa
+Mohon maaf kalo pernah ada salah ndu..
+Semoga kesalahan kita dilebur dibulan suci ini..
+Amiiinnn`;
+
+const PESAN_Nada =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maaf kalau gua pernah ada salah yaa nada
+Semoga dosa dan kesalahan kita dapat terlebur dibulan suci ini
+Amiin
+Masak ketupat di dalam dandang
+Bersama rendang yang super lezat
+Lebaran sudah datang
+Saatnya kita bermaafan cepat`;
+
+const PESAN_Zahid =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maaf hidd kalo aku pernah ada salah..
+semoga kesalahan kita dilebur dibulan suci ini..
+Amiin
+Minum kopi di pagi hari
+Biar mata tetap melek
+Lebaran sudah kembali lagi
+Saatnya hati kembali baik`;
+
+const PESAN_Sesar =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maaf kalo gua ada salah yaa sar..
+Semoga kesalahan kita dilebur dibulan suci ini..
+Amiin
+Pakai sarung duduk di kursi
+Sambil minum segelas kopi
+Maafkan segala salah dan benci
+Selamat Hari Raya Idul Fitri`;
+
+const PESAN_Siti =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+
+Naik delman ke Kota Tua
+Sambil melihat siti menari
+Lebaran tiba waktunya jumpa
+Saling maafkan dengan hati suci
+Mohon maaf yaa je kalo gua selama kita berteman dan berorganisasi pernah ada salah, kemungkinan ada beberapa kesalahfahaman..
+semoga semua kesalahan kita dilebur dibulan suci ini..
+Amiin`;
+
+const PESAN_Nina =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Jalan-jalan ke kota Blitar,
+Jangan lupa membeli gitar.
+Nina memang anaknya pintar,
+Lebaran makan, dompet melebar.
+Mohon maaf yaa nina kalo semasa berteman atau berorganisasi gua pernah ada salah
+Semoga semua kesalahan kita dilebur dibulan suci ini..
+AMiinn`;
+
+const PESAN_Ana =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Main HP sambil rebahan,
+Scroll TikTok sampai lupa waktu.
+Kalau aku pernah bikin kesalahan,
+Maafkan kesalahanku
+Mohon maaf kalo gua ada salaah ya na..
+Semoga semua kesalahan kita dileburkan dibulan suci ini..
+Amiin`;
+
+const PESAN_Reva =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+setiap penyanyi butuh harmoni..
+
+Masalahnya…
+Minal Minul selamat lebaran
+Mohon maaf kalo gua ada salah ya repp, kemungkinann itu ada beberapa ketidaksengajaan..
+Semoga kita kapan kapan bisa duet lagu..
+hehe`;
+
+const PESAN_Adi =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Jalan-jalan ke kota Kediri,
+Pulangnya beli batik di jati.
+Minal Minul untuk Adi,
+Jangan lupa ajak makan jati
+Mohon maaf ya dii kalo gua pernah ada salah ke lu..
+Semoga kesallahan kita dilebur dibulan suci ini..
+Amiin`;
+
+const PESAN_Agsa =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Burung dara burung cendrawasih,
+Terbang tinggi di atas angkasa.
+Hati tulus suci bersih,
+Minal Minul ya Agsa
+Yoo bro
+Mohon maaf kalo gua pernah ada salah ke lu..
+Semoga kesalahan kita dilebur dibulan suci ini..
+Amiin`;
+
+const PESAN_Belia =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Makan ketupat di rumah Cici,
+Ditambah sambal pedas rasanya.
+Hai Belia Hai Cici,
+Bagi THR dikit aja
+Mohon maaf yaa babel kalo gua pernah ada salah
+hehe
+Semoga keselahan kita dilebur dibulan suci ini..
+Amiin`;
+
+const PESAN_Nuh =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Jalan-jalan ke Kota Mekkah,
+Singgah sebentar membeli duku.
+Wahai Nuh yang wajahnya cerah,
+Bagi THR-nya dong ke aku
+Mohon maaf ya nuh kalo gua pernah ada salah ke lu..
+Semoga kita kapan kapan bisa nggambar bareng..
+hehe
+dan semoga kesalahan kita dilebur dibulan suci ini..
+Amiin`;
+
+const PESAN_Nathan =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Dari casting sampai blocking,
+Nathan akting paling memu kau.
+Mohon maaf lahir dan bating,
+THRnya mana? tolong dong kasih tau
+Mohon maaf ya tann kalo semasa kita berteman, kerjasama, project an atau berorganisasi gua ada salah..
+Semoga kesalahan kita dileburkan dibulan suci ini..
+Amiin`;
+
+const PESAN_Akbar =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Akbar,
+
+Setelah dianalisis,
+kedekatan kita menghasilkan satu hal:
+tingkat keanehan yang meningkat secara konsisten
+
+Dan kemungkinan besar,
+aku adalah salah satu variabel utamanya
+
+Maka dari itu,
+di hari Lebaran ini aku melakukan evaluasi diri…
+
+dan mulai dari: minta maaf dulu.
+Yooo my brotherr..
+Mohon maaf kalo gua pernah ada salah ama lu bray.. kemungkinan itu semua kesalahfahaman..
+semoga kita bisa selalu kerjasama dengan lebih baik dan lebih briingass
+#salambringas`;
+
+const PESAN_Ajeng =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Satu jalan, Satu kampung
+Harus saling mendukung
+dalam memberi THR
+Mohon maaf ya jengg kalo aku pernah ada salah selama kita berteman..
+Semoga kita sebagai warga tanggamus bisa saling menjaga kedamaian dan dilebur segala kesalahannya dibulan suci ini..
+Amiin`;
+
+const PESAN_Ai =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Katanya nama Aila itu punya makna cahaya atau pembawa terang
+Mohon maaf aila kalo gua pernah ada berbuat kesalahan yang membuat tidak nyaman baik secara langsung maupun tidak langsung..
+Semoga kesalahan kita dilebur dihari yang fitri ini
+Amiin`;
+
+const PESAN_Elda =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Di tengah padatnya jadwal rapat, deadline, dan agenda yang nggak ada habisnya
+dihari lebaran inilah ada waktunya..
+Mohon maaf ya el kalo pernah ada salah yang membuat tidak nyaman, baik selama berteman maupun berorganisasi..
+Semoga kesalahan kesalahan kita bisa terlebur dibulan suci dan dihari fitri ini..
+dan selalu diberi kesehatan dalam beraktivitas
+Amiin`;
+
+const PESAN_Juli =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Hidup itu kayak lagu,
+kadang ada nada tinggi, kadang juga fals😌
+
+Kalau aku pernah berbuat fals di hidupmu,
+semoga di Lebaran ini bisa kita “remix” jadi lebih hebat
+Mohon maaf ya jull, kalo semasa kita berteman atau berorganisasi aku pernah ada salah yang menyinggung..
+itu murni karena kesalahfahaman, dan semoga kesalahan kita dileburkan dibulan yang suci ini..
+Amiin`;
+
+const PESAN_Faiq =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+yoo iq
+Selamat Hari Raya Idul Fitri, Faiq! Mohon maaf lahir batin. Semoga dosaku di-delete, pahalaku di-render jadi High Quality, dan rezekimu anti-lag kayak renderan pake RTX 4090
+Mohon maaf kalo gua selama berteman sama lu pernah  ada kesalahan yaa..
+Semoga kesalahan kesalahan itu bisa dilerburkan dihari yang fitri ini..
+dan semoga juga kita bisa buat project animasi
+hehe`;
+
+const PESAN_Happy =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+快乐，
+
+如果你的名字是“快乐”，
+那你应该不需要变快乐——因为你本来就是 😌
+
+但如果有时候你不那么快乐，
+那可能是我不小心让“快乐”少了一点点 🙏
+
+开斋节快乐，
+也请原谅我所有的不足 😄
+Mohon maaf yaa happ kalo wǒ ada salah sama nǐ, jadi wǒ ingin minta maaf kalo wǒ pernah ada cuò..
+Semoga Kesalahan wǒ dan nǐ bisa dileburkan dibulan yang suci dan fitri ini..
+Amiin`;
+
+const PESAN_Ayu =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Ada es lilin, ada es wawan. Kalau aku sering ngeselin, maafin Ayu ya teman-teman
+Mohon maaf yu kalo semasa kita berteman pernah ada salah yang menyinggung.. Semoga dibulan yang suci dan dihari yang fitri ini semua kesalahan kita dileburkan..
+Semoga selalu sukses berkarir di bidang masing masing
+Amiin`;
+
+const PESAN_HG =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Beli baju warnanya merah,
+Dipakai pas hari raya.
+Maafin ya HG kalau sering buat marah,
+Padahal aslinya cuma mau bercanda
+Mohon maaf gee kalo semasa kita berteman gua pernah ada salah atau sempat menyinggung perasaan, itu semua kemungkinan hanyalah kesalahfahaman dan juga human error..
+Semoga dibulan suci dan dihari yang fitri ini kesalahan kesalahan kita bisa dileburkan..
+Ammiin`;
+
+const PESAN_Kinan =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Makan ketupat di rumah papan,
+Makan kurma beli di pasar.
+Selamat lebaran hai Kinan,
+Jangan lupa kirim THR ya.pasar.
+Mohon maaf kinann kalo semasa kita berteman gua ada berbuat kesalahan atau sempat menyinggung perasaan..
+itu semua mungkin terjadi karena kesalahfahman..
+Semoga dibulan suci dan dihari yang fitri ini semua kesalahan kita bisa dileburkan..
+Amiin`;
+
+const PESAN_Zahrotusita =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Yoo wassup
+Makan opor di rumah Sita,
+Rasanya enak tiada dua.
+Mohon maaf lahir batin ya Sita,
+Jangan lupa THR-nya ya
+Mohon maaf sita kalo gua sempet berbuat salah ke lu..
+Semoga dibulan yang suci dan dihari yang fitri ini semua kesalahan kita bisa dileburkan..
+Amiin`;
+
+const PESAN_PCK =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Mohon maff ya PCK kalo gua pernah ada salah ke lu.. Semuanya murni karena ketidaksengajaan dan tidak ada bermaksud layn
+Semoga dosamu setipis tisu, tapi THR-mu setebal kamus bahasa Arab
+Semoga semua kesalahan kita dileburkan dibulan yang suci dan hari yang fitri ini
+Amiin`;
+
+const PESAN_Ilhm =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Makan opor di rumah Pak Camat,
+Belinya bareng si Ilham.
+Mohon maaf lahir dan batin ya sobat,
+Semoga umur kita makin berfaedah dan tenteram!
+Mohon maaf ham kalo gua pernah salah ke lu baik dari tutur perkataan maupun perbuatan..
+Semoga dibulan yang suci ini kesalahan kita dapat dileburkan...
+Amiin`;
+
+const PESAN_RDitdut =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Yooooo Wassupp mamen brother Selamat Bodo's day
+Kulo nyuwun pangapunten ingkang sebesar-besaringipun dhumateng panjenengan, menawi wonten lepat, kalepatan, utawi kekirangan kula, ingkang kadadosan kanthi sengaja utawi boten.
+
+Mugi ing dinten ingkang suci menika, kita sedaya pikantuk pangaksama lan dados pribadi ingkang langkung sae.
+
+Minal aidzin wal faidzin, nyuwun pangapunten lahir lan batin.
+#lepatlapitkelepatanlepet
+hehe`;
+
+const PESAN_Bung =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.
+Di hari nan fitri ini, aku nyuwun maaf nian kalo selama ini ado salah kato, salah sikap, yang sengajo maupun dak sengajo.
+Mugo di hari rayo ini, kito samo-samo dibersihin hati dan pikiran.
+Jangan lupo rendang seafoodnyo
+hehe`;
+
+/*=========================================
+const PESAN_DEFAULT =
+`Selamat Hari Raya Idul Fitri 1447 H.
+Taqabbalallahu minna wa minkum.
+Mohon maaf lahir dan batin.
+Semoga kita semua kembali suci, diberi kebahagiaan, kesehatan, dan keberkahan di hari yang fitri ini.`;
+===========================================*/
+
+
+const PESAN_DOSEN =
+`Assalamu'alaikum Warahmatullahi Wabarakatuh,
+
+Segala puji bagi Allah SWT, Sang Sutradara Kehidupan yang Paling Agung, yang telah memberikan kita kesempatan untuk menyelesaikan proses 'syuting' ibadah di bulan Ramadhan 1447 H. Setelah sebulan penuh kita melakukan 'production' untuk meningkatkan kualitas iman, kini tibalah saatnya kita merayakan 'Big Premiere' kemenangan di hari yang fitri ini dengan hati yang kembali suci (True White Balanced).
+
+Latar belakang permohonan maaf ini disusun karena saya menyadari bahwa interaksi kita, baik di dalam studio, lokasi syuting, maupun di ruang editing, sering kali mengalami 'technical error'. Layaknya footage yang bocor atau audio yang peaking, tutur kata dan perilaku saya mungkin pernah mengganggu estetika hubungan kita atau menyebabkan 'mood' Anda drop saat deadline melanda.
+
+Sebagai mahasiswa Produksi Media, saya paham betul bahwa visual yang indah bermula dari framing yang tepat. Di hari lebaran ini, saya ingin melakukan 're-framing' terhadap hubungan kita, menggeser sudut pandang dari segala prasangka buruk, dan memfokuskan kembali (pull focus) lensa hati kita pada nilai-nilai persaudaraan yang tulus.
+
+Dalam tinjauan pustaka selama bulan puasa, kita telah diajarkan untuk menahan hawa nafsu, yang ibaratnya seperti menahan diri dari godaan menggunakan filter yang berlebihan agar hasil akhirnya tetap autentik. Ramadhan adalah proses 'color grading' spiritual yang mengubah 'tone' hati kita yang kusam menjadi lebih cerah, tajam, dan penuh warna ketakwaan.
+
+Metodologi maaf yang saya gunakan kali ini adalah metode 'Cut-to-Content', langsung pada intinya tanpa basa-basi. Saya memohon maaf atas segala kesalahan yang disengaja maupun yang bersifat candid. Mari kita lakukan 'Wipe Clean' pada memori kita terhadap segala gesekan interpersonal, agar 'timeline' persahabatan kita kembali mulus tanpa ada 'frame' yang rusak (corrupted).
+
+Berdasarkan analisis hasil produksi selama setahun terakhir, saya menemukan bahwa ego kita sering kali menjadi 'blocking' terbesar dalam menciptakan kolaborasi yang harmonis. Namun, melalui momentum Idul Fitri ini, mari kita hapus segala noise konflik dan menyatukan 'vibe' kita dalam frekuensi yang sama untuk menghasilkan karya-karya kehidupan yang lebih inspiratif.
+
+Pembahasan mengenai hari kemenangan ini adalah tentang 'Final Export' yang berkualitas. Nilai akhir yang kita harapkan bukanlah sekadar rating tinggi dari manusia, melainkan status 'Approved' dari Allah SWT untuk masuk ke surga-Nya melalui jalur 'Fast Track' (Rendered and Optimized) bagi hamba-hamba-Nya yang ikhlas memaafkan.
+
+Keterbatasan dalam ucapan ini saya akui karena keterbatasan resource kata-kata saya dalam merangkai kalimat yang estetis. Layaknya kamera yang kehabisan baterai saat momen krusial, lisan saya pun sering kali 'mati kutu' untuk memberikan respons terbaik kepada Anda semua selama hiruk pikuk pengerjaan proyek mata kuliah.
+
+Sebagai saran untuk pengembangan kreativitas kita di masa depan, marilah kita perkuat 'storytelling' kehidupan kita dengan narasi-narasi kebaikan. Semoga kita semua konsisten menerapkan prinsip 'Good Ethics' dalam berkarya dan tetap solid dalam 'teamwork' untuk menaklukkan tantangan industri media yang semakin dinamis.
+
+Akhir kata, selamat Hari Raya Idul Fitri 1447 H. Minal Aidin Wal Faizin, Mohon Maaf Lahir dan Batin. Semoga seluruh amal ibadah kita diterima (Wrapped and Delivered) oleh Allah SWT dan segala dosa kita dihapus (Deleted from Disk) secara permanen. Mari kita mulai kembali dari titik '0' (Timecode 00:00:00:00) dengan semangat baru untuk memproduksi masa depan yang lebih gemilang.
+
+Wassalamu'alaikum Warahmatullahi Wabarakatuh.`;
+
+/* ── KELAS A ── */
+const DATA = {
+  A: [
+    { nama:"Aditya Pratama",             pesan: PESAN_Adit },
+    { nama:"Ahmad Faisal Rossi",         pesan: PESAN_Isal },
+    { nama:"Aisyah Aqeelah Azzahra",     pesan: PESAN_Aisyah },
+    { nama:"Alisa",                      pesan: PESAN_Alisa },
+    { nama:"Anggi Kurniawan",            pesan: PESAN_Anggi },
+    { nama:"Aziizah Safiiqah Nabilla",   pesan: PESAN_Jijah },
+    { nama:"Bimo Aji Prasetyo",          pesan: PESAN_Bimo },
+    { nama:"Chang Nara Seabin",          pesan: PESAN_Chang },
+    { nama:"Desta Adhit Tama",           pesan: PESAN_Desta },
+    { nama:"Dinda Sakya D. A",           pesan: PESAN_Dins },
+    { nama:"Eka Rahayu",                 pesan: PESAN_Eka },
+    { nama:"Fajar Hafizh",               pesan: PESAN_Asep },
+    { nama:"Giavani Agneta",             pesan: PESAN_Gea },
+    { nama:"Ikhsan Abdul Fatah",         pesan: PESAN_Is },
+    { nama:"Inas Atiqah Rahmasari",      pesan: PESAN_Inas },
+    { nama:"Kesia Seftiani M",           pesan: PESAN_Kei },
+    { nama:"Kian Abhinaya Pratama",      pesan: PESAN_Ab },
+    { nama:"M Baihaqi Erian Putra",      pesan: PESAN_abay },
+    { nama:"Muhamad Fahrurrohman",       pesan: PESAN_Paung },
+    { nama:"Muhammad Fatih A",           pesan: PESAN_Fatih },
+    { nama:"Muhammad Syahrul Romadhoni", pesan: PESAN_Syah },
+    { nama:"Naila Kaswa Azzahra",        pesan: PESAN_NailK },
+    { nama:"Nazwa Heria Naura",          pesan: PESAN_Naswa },
+    { nama:"Nugraha Mahardika K",        pesan: PESAN_Nugi },
+    { nama:"Okta Wahyu Dwi Ramdani",     pesan: PESAN_Gua },
+    { nama:"Queenta Arifin Wardana",     pesan: PESAN_Q },
+    { nama:"Rendi Apriliansah",          pesan: PESAN_Rendi },
+    { nama:"Reza Ramdhani",              pesan: PESAN_Reza },
+    { nama:"Salwa Fadhila Assyifah",     pesan: PESAN_Salwa },
+    { nama:"Siska Amelia Putri",         pesan: PESAN_Sis },
+    { nama:"Syawaluddin Izhar",          pesan: PESAN_Izhar },
+    { nama:"Tunjung Adam Dwiriawan",     pesan: PESAN_Adam },
+    { nama:"Zahiyya Izzah Shadily",      pesan: PESAN_Zah },
+    { nama:"Zhelsya Rianov",             pesan: PESAN_Zee },
+  ],
+  /* ── KELAS B ── */
+  B: [
+    { nama:"Galuh Ayudya Pratiwi",             pesan: PESAN_Gal },
+    { nama:"Kesya Viafaniscesa Azzahra",       pesan: PESAN_Cesa },
+    { nama:"Arkan Assafat Fatra",              pesan: PESAN_Arkan },
+    { nama:"Diva Maureen Mirechel",            pesan: PESAN_Diva },
+    { nama:"Naila Salsabilla",                 pesan: PESAN_NailaS },
+    { nama:"Sazkia Nurul Hasanah",             pesan: PESAN_Saz },
+    { nama:"Triana Desriani",                  pesan: PESAN_Tri },
+    { nama:"Dimas Putra Pandu",                pesan: PESAN_DPT },
+    { nama:"Nada Asyifa Shaliha",              pesan: PESAN_Nada },
+    { nama:"Zahid Ibnu Fikri",                 pesan: PESAN_Zahid },
+    { nama:"M Sesar Spartazifa",               pesan: PESAN_Sesar },
+    { nama:"Siti Zahara Heidiani Adjieputri",  pesan: PESAN_Siti },
+    { nama:"Nina Gustiyana",                   pesan: PESAN_Nina },
+    { nama:"Ana Ridhotul Sifa",                pesan: PESAN_Ana },
+    { nama:"Revalerie Zefanya Sofianadine H",  pesan: PESAN_Reva },
+    { nama:"Rezky Adi Darma",                  pesan: PESAN_Adi },
+    { nama:"Agsa Erlambang",                   pesan: PESAN_Agsa },
+    { nama:"Belia Zahara Putri",               pesan: PESAN_Belia },
+    { nama:"Nuh",                              pesan: PESAN_Nuh },
+    { nama:"Muhammad Nathan H",                pesan: PESAN_Nathan },
+    { nama:"Muhammad Akbar Jaiz",              pesan: PESAN_Akbar },
+    { nama:"Ajeng Restu Prahamita",            pesan: PESAN_Ajeng },
+    { nama:"Aila Azzura Mawardi",              pesan: PESAN_Ai },
+    { nama:"Elda Silviana",                    pesan: PESAN_Elda },
+    { nama:"Juliani Dwi Puspita",              pesan: PESAN_Juli },
+    { nama:"Faiq Fadlurahman",                 pesan: PESAN_Faiq },
+    { nama:"Happy Aprilya M",                  pesan: PESAN_Happy },
+    { nama:"Ayu Maharani",                     pesan: PESAN_Ayu },
+    { nama:"Chintia Azahra Nugraha",           pesan: PESAN_HG },
+    { nama:"Kinanti Maharani",                 pesan: PESAN_Kinan },
+    { nama:"Zahrotusita",                      pesan: PESAN_Zahrotusita },
+    { nama:"Pebri Cahya Kamila",               pesan: PESAN_PCK },
+    { nama:"Ilham Ferdiyansyah",               pesan: PESAN_Ilhm },
+    { nama:"Raditya Anugrah",                  pesan: PESAN_RDitdut },
+    { nama:"Bunga Aidila Lorenza",             pesan: PESAN_Bung },
+  ],
+  /* ── DOSEN ── */
+  DOSEN: [
+    { nama:"YTH. Bapak Teguh",      pesan: PESAN_DOSEN },
+    { nama:"YTH. Ibu Sri",          pesan: PESAN_DOSEN },
+    { nama:"YTH. Bapak Syaifuddin", pesan: PESAN_DOSEN },
+    { nama:"YTH. Miss Eling",       pesan: PESAN_DOSEN },
+    { nama:"YTH. Miss Rika",        pesan: PESAN_DOSEN },
+    { nama:"YTH. Miss Syifa",       pesan: PESAN_DOSEN },
+    { nama:"YTH. Miss Velly",       pesan: PESAN_DOSEN },
+    { nama:"YTH. Miss Meyla",       pesan: PESAN_DOSEN },
+    { nama:"YTH. Miss Made",        pesan: PESAN_DOSEN },
+    { nama:"YTH. Ibu Upy",          pesan: PESAN_DOSEN },
+  ]
+};
+
+/* ================================================================
+   DROPDOWN
+   ================================================================ */
+function updateNama(){
+  const kelas = document.getElementById('selKelas').value;
+  const sel   = document.getElementById('selNama');
+  sel.innerHTML = '<option value="">— Pilih Nama —</option>';
+  if(kelas && DATA[kelas]){
+    DATA[kelas].forEach(e=>{
+      const o=document.createElement('option');
+      o.value=e.nama; o.textContent=e.nama;
+      sel.appendChild(o);
+    });
+  }
+  sembunyikanResult();
+}
+
+function onNamaChange(){ sembunyikanResult(); }
+
+function sembunyikanResult(){
+  const r=document.getElementById('ucapanResult');
+  r.classList.remove('shown');
+  setTimeout(()=>r.classList.remove('show'),400);
+}
+
+/* ================================================================
+   TAMPILKAN UCAPAN KHUSUS
+   ================================================================ */
+function tampilkanUcapan(){
+  const kelas = document.getElementById('selKelas').value;
+  const nama  = document.getElementById('selNama').value;
+  if(!kelas||!nama){ alert('Silakan pilih kelompok dan nama terlebih dahulu.'); return; }
+
+  const entry = DATA[kelas].find(e=>e.nama===nama);
+  if(!entry) return;
+
+  /* Isi kartu */
+  document.getElementById('ucNama').textContent  = nama;
+  document.getElementById('ucKelas').textContent = kelas==='DOSEN' ? 'DOSEN' : 'KELAS '+kelas;
+  document.getElementById('ucPesan').textContent = entry.pesan;  /* plain text, not editable */
+
+  /* Tampilkan dengan animasi */
+  const result = document.getElementById('ucapanResult');
+  result.classList.add('show');
+  result.classList.remove('shown');
+  requestAnimationFrame(()=>{
+    requestAnimationFrame(()=>{
+      result.classList.add('shown');
+      result.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  triggerKetupatRain();
+}
+
+/* ================================================================
+   KETUPAT RAIN
+   ================================================================ */
+function triggerKetupatRain(){
+  const rain=document.getElementById('ketupatRain');
+  rain.innerHTML='';
+  const palette=[
+    {b:'#4ade80',g:'rgba(74,222,128,.6)'},{b:'#86efac',g:'rgba(134,239,172,.5)'},
+    {b:'#FFD700',g:'rgba(255,215,0,.5)'}, {b:'#34d399',g:'rgba(52,211,153,.6)'},
+  ];
+  for(let i=0;i<50;i++){
+    setTimeout(()=>{
+      const k=document.createElement('div'); k.className='rain-k';
+      const c=palette[Math.floor(Math.random()*palette.length)];
+      const sz=8+Math.random()*14;
+      k.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;border-color:${c.b};box-shadow:0 0 8px ${c.g};animation-duration:${2+Math.random()*3}s;`;
+      rain.appendChild(k);
+      setTimeout(()=>k.remove(),6000);
+    },i*70);
+  }
+}
+
+/* ================================================================
+   THR MODAL
+   ================================================================ */
+function openTHR(){ document.getElementById('thrModal').classList.add('open'); }
+function closeTHR(){ document.getElementById('thrModal').classList.remove('open'); }
+function closeTHRBackdrop(e){ if(e.target===document.getElementById('thrModal')) closeTHR(); }
+function copyNumber(){
+  navigator.clipboard.writeText('083168499012').then(()=>{
+    const b=document.getElementById('btnCopy');
+    b.textContent='✓ Tersalin!'; b.classList.add('copied');
+    setTimeout(()=>{ b.textContent='📋 Salin Nomor'; b.classList.remove('copied'); },2500);
+  });
+}
+
+/* ================================================================
+   MUSIC PLAYER
+   ================================================================
+   ✏️  DAFTAR LAGU — tambah/ubah nama file .mp3 di sini.
+       Letakkan file .mp3 di folder yang sama dengan file HTML.
+   ================================================================ */
+const TRACKS = [
+  'Alamak Raya Lagi - De Fam Official Music Video.mp3',
+  'Gita Gutawa - Idul Fitri Official Music Video.mp3',
+  'TARAGAK PULANG - DIRA SATI, EJA, ABDI.mp3',
+  'Ustad Jefri Al Buchori - Selamat Hari Lebaran _ Official Lyric Video.mp3',
+  'Ungu - Selamat Lebaran _ Official Video.mp3',
+  'Tasya - Selamat Hari Lebaran Official Music Video.mp3',
+  'Upin & Ipin - Suasana Di Hari Raya.mp3',
+
+];
+
+/* ── State ── */
+let trackIndex   = 0;
+let libOpen      = false;
+
+/* ── Elements ── */
+const audio        = document.getElementById('audioEl');
+const vinylDisc    = document.getElementById('vinylDisc');
+const tonearm      = document.getElementById('tonearm');
+const btnPlay      = document.getElementById('btnPlay');
+const btnPause     = document.getElementById('btnPause');
+const trackNameEl  = document.getElementById('trackName');
+const progressFill = document.getElementById('progressFill');
+const libraryList  = document.getElementById('libraryList');
+const libCount     = document.getElementById('libCount');
+const playerLib    = document.getElementById('playerLibrary');
+const btnLib       = document.getElementById('btnLibrary');
+
+/* ── Helpers ── */
+function trackLabel(src){
+  return src.replace(/\.mp3$/i,'').replace(/[-_]/g,' ');
+}
+
+/* ── Build library list ── */
+function buildLibrary(){
+  libCount.textContent = TRACKS.length + ' lagu';
+  libraryList.innerHTML = '';
+  TRACKS.forEach((src, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'library-item' + (i === trackIndex ? ' active' : '');
+    btn.innerHTML = `
+      <span class="lib-num">${i+1}</span>
+      <span class="lib-icon">
+        <svg width="10" height="11" viewBox="0 0 10 11" fill="none">
+          <polygon points="0,0 10,5.5 0,11" fill="${i===trackIndex ? '#FFD700' : 'rgba(255,215,0,0.35)'}"/>
+        </svg>
+      </span>
+      <span class="lib-name">${trackLabel(src)}</span>
+    `;
+    btn.onclick = () => { jumpTo(i); };
+    libraryList.appendChild(btn);
+  });
+}
+
+function refreshLibraryActive(){
+  const items = libraryList.querySelectorAll('.library-item');
+  items.forEach((el, i) => {
+    el.classList.toggle('active', i === trackIndex);
+    const tri = el.querySelector('polygon');
+    if(tri) tri.setAttribute('fill', i===trackIndex ? '#FFD700' : 'rgba(255,215,0,0.35)');
+  });
+}
+
+/* ── Toggle library panel ── */
+function toggleLibrary(){
+  libOpen = !libOpen;
+  playerLib.classList.toggle('open', libOpen);
+  btnLib.classList.toggle('open', libOpen);
+  if(libOpen) buildLibrary();
+}
+
+/* ── Load track (no autoplay) ── */
+function loadTrack(idx){
+  if(!TRACKS.length) return;
+  trackIndex = ((idx % TRACKS.length) + TRACKS.length) % TRACKS.length;
+  audio.src  = TRACKS[trackIndex];
+  trackNameEl.textContent = trackLabel(TRACKS[trackIndex]);
+  progressFill.style.width = '0%';
+  refreshLibraryActive();
+}
+
+/* ── Jump to track & play ── */
+function jumpTo(idx){
+  loadTrack(idx);
+  audio.play().then(()=>{
+    setPlayingUI(true);
+  }).catch(()=>{ trackNameEl.textContent = 'File tidak ditemukan'; });
+}
+
+/* ── UI helpers ── */
+function setPlayingUI(playing){
+  vinylDisc.classList.toggle('spinning', playing);
+  tonearm.classList.toggle('on-record', playing);
+  btnPlay.style.display  = playing ? 'none' : 'flex';
+  btnPause.style.display = playing ? 'flex'  : 'none';
+}
+
+/* ── Controls ── */
+function playerPlay(){
+  if(!TRACKS.length){ trackNameEl.textContent='Tidak ada lagu'; return; }
+  if(!audio.src || audio.src === window.location.href) loadTrack(0);
+  audio.play().then(()=> setPlayingUI(true))
+    .catch(()=>{ trackNameEl.textContent='File tidak ditemukan'; });
+}
+
+function playerPause(){
+  audio.pause();
+  setPlayingUI(false);
+}
+
+function playerStop(){
+  audio.pause();
+  audio.currentTime = 0;
+  progressFill.style.width = '0%';
+  setPlayingUI(false);
+}
+
+function playerTogglePlay(){
+  audio.paused ? playerPlay() : playerPause();
+}
+
+function playerNext(){
+  const wasPlaying = !audio.paused;
+  loadTrack(trackIndex + 1);
+  if(wasPlaying) audio.play().then(()=> setPlayingUI(true)).catch(()=>{});
+  if(libOpen) buildLibrary();
+}
+
+function playerPrev(){
+  const wasPlaying = !audio.paused;
+  if(audio.currentTime > 3){
+    audio.currentTime = 0;
+  } else {
+    loadTrack(trackIndex - 1);
+    if(libOpen) buildLibrary();
+  }
+  if(wasPlaying) audio.play().then(()=> setPlayingUI(true)).catch(()=>{});
+}
+
+function playerSeek(e){
+  if(!audio.duration) return;
+  const rect = document.getElementById('progressWrap').getBoundingClientRect();
+  const pct  = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+  audio.currentTime = pct * audio.duration;
+}
+
+/* ── Progress update ── */
+audio.addEventListener('timeupdate', ()=>{
+  if(audio.duration)
+    progressFill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+});
+
+/* ── Auto next ── */
+audio.addEventListener('ended', ()=>{
+  playerNext();
+});
+
+/* ── Init ── */
+if(TRACKS.length) loadTrack(0);
+
+
+</script>
+</body>
+</html>
